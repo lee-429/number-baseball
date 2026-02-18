@@ -59,6 +59,7 @@
 
     .reset-btn {
       background: #888;
+      margin-top: 8px;
     }
 
     .reset-btn:hover {
@@ -69,12 +70,17 @@
       margin-top: 20px;
       font-size: 18px;
       font-weight: bold;
+      color: #2a5298;
     }
 
     .error {
-      color: red;
+      color: #d9534f;
+      background-color: #f9f2f2;
+      padding: 10px;
+      border-radius: 5px;
       margin-top: 15px;
       font-size: 14px;
+      border-left: 5px solid #d9534f;
     }
 
     .history {
@@ -113,34 +119,31 @@
 
   <p>남은 기회: <strong th:text="${chance}"></strong></p>
 
-  <!-- 숫자 입력 -->
   <form th:action="@{/guess}" method="post">
     <input type="text"
            name="input"
            maxlength="4"
            pattern="\d{4}"
            inputmode="numeric"
-           placeholder="4자리 숫자 입력"
+           placeholder="서로 다른 4자리 숫자 입력"
            required
+           autocomplete="off"
            autofocus />
     <button type="submit">확인</button>
   </form>
 
-  <!-- 🔄 리셋 버튼 -->
-  <form th:action="@{/reset}" method="post">
-    <button type="submit" class="reset-btn">🔄 다시 시작</button>
-  </form>
+  <div class="error" th:if="${error != null}" th:text="${error}"></div>
 
-  <!-- 결과 표시 -->
   <div class="result" th:if="${strike != null}">
     <span th:text="${strike}"></span> Strike /
     <span th:text="${ball}"></span> Ball
   </div>
 
-  <div class="error" th:if="${error != null}" th:text="${error}"></div>
+  <form th:action="@{/reset}" method="post">
+    <button type="submit" class="reset-btn">🔄 다시 시작</button>
+  </form>
 
-  <!-- 시도 기록 -->
-  <div class="history" th:if="${history != null}">
+  <div class="history" th:if="${history != null and !history.isEmpty()}">
     <h3>📜 시도 기록</h3>
     <ul>
       <li th:each="h : ${history}" th:text="${h}"></li>

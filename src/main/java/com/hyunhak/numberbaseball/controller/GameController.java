@@ -51,6 +51,14 @@ public class GameController {
             return "redirect:/";
         }
 
+        // 1. 중복 입력 및 유효성 검증 추가
+        if (!gameService.isUnique(input)) {
+            model.addAttribute("error", "첫 자리는 0 불가능, 숫자 중복 불가능");
+            model.addAttribute("history", game.getHistory());
+            model.addAttribute("chance", game.getChance());
+            return "game"; // 기회를 깎지 않고 다시 입력 화면으로
+        }
+
         int[] result = gameService.check(game.getAnswer(), input);
 
         game.decreaseChance();

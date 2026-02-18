@@ -1,7 +1,9 @@
 package com.hyunhak.numberbaseball.service;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,28 @@ public class GameService {
             .limit(4) // 앞에서 4개만
             .map(String::valueOf) // 숫자 -> 문자열 변환
             .collect(Collectors.joining()); // 하나의 문자열로 합치기
+    }
+
+    public boolean isUnique(String input) {
+        // 1. null이나 4자리가 아닌 경우 바로 탈락
+        if (input == null || input.length() != 4) {
+            return false;
+        }
+
+        // 2. 첫 번째 자리가 '0'인지 확인
+        if (input.charAt(0) == '0') {
+            return false;
+        }
+
+        // 3. 입력값 중복 체크 (Set 활용)
+        Set<Character> chars = new HashSet<>();
+        for (char c : input.toCharArray()) {
+            if (!Character.isDigit(c)) return false;
+            chars.add(c);
+        }
+
+        // 4. 중복이 없다면 4개가 들어있어야 함
+        return chars.size() == 4;
     }
 
     // 사용자가 입력한 값과 정답을 비교해서 스트라이크와 볼 개수를 계산
