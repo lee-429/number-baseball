@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>성공</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+      text-align: center;
+      padding: 60px 15px;
+      margin: 0;
+      color: white;
+    }
+
+    .box {
+      background: white;
+      color: #333;
+      width: 90%;
+      max-width: 400px;
+      margin: auto;
+      padding: 40px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+    }
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto 0 auto;
+      width: 100%;
+      max-width: 300px;
+      padding: 14px;
+      background: #11998e;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    a:hover {
+      background: #0d7f75;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>🎉 성공!</h1>
+  <p>정답을 맞추셨습니다!</p>
+  <a th:href="@{/}">🔄 다시 시작</a>
+</div>
+
+</body>
+</html>

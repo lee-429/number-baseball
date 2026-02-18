@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>숫자야구 게임</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      text-align: center;
+      padding: 40px 10px;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      color: #333;
+      width: 90%;
+      max-width: 420px;
+      margin: auto;
+      padding: 30px 20px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #2a5298;
+      color: white;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+
+    button:hover {
+      background: #1e3c72;
+    }
+
+    .reset-btn {
+      background: #888;
+    }
+
+    .reset-btn:hover {
+      background: #555;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .history {
+      margin-top: 25px;
+      text-align: left;
+      max-height: 200px;
+      overflow-y: auto;
+      border-top: 1px solid #ddd;
+      padding-top: 15px;
+    }
+
+    .history h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .history ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .history li {
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>⚾ 숫자야구</h1>
+
+  <p>남은 기회: <strong th:text="${chance}"></strong></p>
+
+  <!-- 숫자 입력 -->
+  <form th:action="@{/guess}" method="post">
+    <input type="text"
+           name="input"
+           maxlength="4"
+           pattern="\d{4}"
+           inputmode="numeric"
+           placeholder="4자리 숫자 입력"
+           required
+           autofocus />
+    <button type="submit">확인</button>
+  </form>
+
+  <!-- 🔄 리셋 버튼 -->
+  <form th:action="@{/reset}" method="post">
+    <button type="submit" class="reset-btn">🔄 다시 시작</button>
+  </form>
+
+  <!-- 결과 표시 -->
+  <div class="result" th:if="${strike != null}">
+    <span th:text="${strike}"></span> Strike /
+    <span th:text="${ball}"></span> Ball
+  </div>
+
+  <div class="error" th:if="${error != null}" th:text="${error}"></div>
+
+  <!-- 시도 기록 -->
+  <div class="history" th:if="${history != null}">
+    <h3>📜 시도 기록</h3>
+    <ul>
+      <li th:each="h : ${history}" th:text="${h}"></li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

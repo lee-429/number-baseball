@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실패</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #cb2d3e, #ef473a);
+      text-align: center;
+      padding: 60px 15px;
+      margin: 0;
+      color: white;
+    }
+
+    .box {
+      background: white;
+      color: #333;
+      width: 90%;
+      max-width: 400px;
+      margin: auto;
+      padding: 40px 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    strong {
+      font-size: 20px;
+      color: #cb2d3e;
+    }
+
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 300px;
+      padding: 14px;
+      background: #cb2d3e;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+
+    a:hover {
+      background: #a3202f;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h1>💀 실패!</h1>
+  <p>
+    정답은
+    <strong th:text="${answer}"></strong>
+    이었습니다.
+  </p>
+  <a th:href="@{/}">🔄 다시 시작</a>
+</div>
+
+</body>
+</html>
